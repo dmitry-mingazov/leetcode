@@ -10,8 +10,12 @@ MKDIR = mkdir -p
 
 all: $(OUTDIR) $(OUT)
 
-$(OUT): $(SRC)
+$(OUTDIR)/%: $(SRCDIR)/%.c
 	$(CC) -g -o $@ $< $(CCFLAGS)
 
 $(OUTDIR):
 	$(MKDIR) $(OUTDIR)
+
+clean:
+	$(CLEAN) $(OUTDIR)/*
+	$(CLEANDIR) $(OUTDIR)
