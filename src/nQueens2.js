@@ -1,24 +1,26 @@
 /*
-* https://leetcode.com/problems/n-queens/
+* https://leetcode.com/problems/n-queens-ii/
 */
 /**
  * @param {number} n
  * @return {string[][]}
  */
-var solveNQueens = function(n) {
+var totalNQueens = function(n) {
     var board = Array.from({length: n}, () => Array.from('.'.repeat(n)));
     var solutions = [];
     let columns = Array.from({length: n}, (v, k) => k);
     solutions = fn(board, n, 0, columns);
-    return solutions.map(mat => mat.map(arr => arr.join("")));
+    return solutions;
+    console.log(solutions);
+    // return solutions.map(mat => mat.map(arr => arr.join("")));
 };
 
 function fn(board, n, currRow, columns) {
     // console.log(`fn(${n},${currRow})`);
     if(currRow == n) {
-        return [JSON.parse(JSON.stringify(board))];
+        return 1;
     }
-    let solutions = []
+    let solutions = 0
     let clmns = [...columns];
     for(let i = 0; i<clmns.length; i++) {
         let currCol = clmns[i];
@@ -26,10 +28,7 @@ function fn(board, n, currRow, columns) {
         if(isValid(board, n, currRow, currCol) == true) {
             board[currRow][currCol] = 'Q';
             let solution = fn(board, n, currRow+1, clmns)
-            if(solution.length > 0) {
-                solutions.push(...solution);
-            }
-
+            solutions += solution;
             board[currRow][currCol] = '.';
         } 
         clmns.splice(i, 0, currCol);
@@ -64,4 +63,4 @@ function isValid(board, n, x, y) {
 }
 
 
-console.log(solveNQueens(5));
+console.log(totalNQueens(5));
