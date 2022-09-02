@@ -9,11 +9,16 @@
  *     struct TreeNode *right;
  * };
  */
+#include <stdio.h>
+#include <stdlib.h>
+
 struct TreeNode {
     int val;
     struct TreeNode *left;
     struct TreeNode *right;
 };
+
+int fn(struct TreeNode* node, int max);
 
 int goodNodes(struct TreeNode* root){
     return fn(root, root->val);
@@ -30,4 +35,8 @@ int fn(struct TreeNode* node, int max) {
     }
     result += fn(node->right, max) + fn(node->left, max);
     return result;
+}
+
+int main(void) {
+    return 0;
 }
